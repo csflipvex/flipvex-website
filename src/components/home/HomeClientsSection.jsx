@@ -28,17 +28,33 @@ export const HomeClientsSection = () => {
   };
 
   const handlePrevImage = useCallback(() => {
-    if (!activeClient) return;
+    if (!activeClient || !activeClient.screenshots?.length) return;
     setCurrentImageIndex((prev) => 
       prev === 0 ? activeClient.screenshots.length - 1 : prev - 1
     );
   }, [activeClient]);
 
   const handleNextImage = useCallback(() => {
-    if (!activeClient) return;
+    if (!activeClient || !activeClient.screenshots?.length) return;
     setCurrentImageIndex((prev) => 
       prev === activeClient.screenshots.length - 1 ? 0 : prev + 1
     );
+  }, [activeClient]);
+
+  // Clean interval: runs continuously every 3 seconds as long as modal is open
+  useEffect(() => {
+    if (!activeClient || !activeClient.screenshots || activeClient.screenshots.length <= 1) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => {
+        const total = activeClient.screenshots.length;
+        return prev + 1 >= total ? 0 : prev + 1;
+      });
+    }, 3000);
+
+    return () => clearInterval(timer);
   }, [activeClient]);
 
   useEffect(() => {
@@ -77,55 +93,77 @@ export const HomeClientsSection = () => {
 
         {/* 3-Column Preview Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {previewClients.map((client) => (
-            <div 
-              key={client.id}
-              onClick={() => handleOpenModal(client)}
-              className="group p-8 rounded-3xl bg-white border border-zinc-200 hover:border-brand-purple/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-72 cursor-pointer"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleOpenModal(client);
-                }
-              }}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-white border border-zinc-200/80 p-1.5 flex items-center justify-center overflow-hidden shadow-xs group-hover:scale-105 transition-transform duration-200">
+          {previewClients.map((client) => {
+            const bgImage = client.screenshots && client.screenshots.length > 0 
+              ? client.screenshots[0] 
+              : null;
+
+            return (
+              <div 
+                key={client.id}
+                onClick={() => handleOpenModal(client)}
+                className="group relative p-8 rounded-3xl bg-zinc-900 border border-zinc-300/60 hover:border-brand-purple/70 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between h-80 cursor-pointer overflow-hidden"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleOpenModal(client);
+                  }
+                }}
+              >
+                {/* Background Screenshot Image */}
+                {bgImage && (
+                  <div className="absolute inset-0 z-0">
                     <img 
-                      src={client.logo} 
-                      alt={`${client.name} logo`} 
-                      className="w-full h-full object-contain rounded-xl"
-                      loading="lazy"
+                      src={bgImage} 
+                      alt="" 
+                      className="w-full h-full object-cover object-top opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 ease-out"
                     />
                   </div>
-                  <div>
-                    <span className="text-xs font-mono uppercase tracking-widest text-brand-accent font-bold block">
-                      {client.category}
-                    </span>
-                    <span className="text-[11px] font-mono text-zinc-400">
-                      View Showcase ({client.screenshots?.length || 0})
-                    </span>
+                )}
+
+                {/* Soft Smooth Dark Gradient Overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 pointer-events-none" />
+
+                {/* Top Row */}
+                <div className="relative z-10 flex items-start justify-between">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-md border border-white/40 p-1.5 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300">
+                      <img 
+                        src={client.logo} 
+                        alt={`${client.name} logo`} 
+                        className="w-full h-full object-contain rounded-xl"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono uppercase tracking-widest text-brand-accent font-extrabold block drop-shadow-md">
+                        {client.category}
+                      </span>
+                      <span className="text-[11px] font-mono text-zinc-200/90 font-medium drop-shadow-sm">
+                        View Showcase ({client.screenshots?.length || 0})
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:border-brand-accent transition-all duration-300 shadow-md">
+                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center text-zinc-400 group-hover:text-brand-purple group-hover:border-brand-purple/40 transition">
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </div>
 
-              <div>
-                <h3 className="text-2xl font-bold text-brand-dark tracking-tight group-hover:text-brand-purple transition-colors">
-                  {client.name}
-                </h3>
-                <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-500">Outcome Delivered:</span>
-                  <span className="font-bold text-brand-purple">{client.impact}</span>
+                {/* Bottom Row */}
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-white transition-colors drop-shadow-md">
+                    {client.name}
+                  </h3>
+                  <div className="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-mono">
+                    <span className="text-zinc-300 font-medium drop-shadow-sm">Outcome Delivered:</span>
+                    <span className="font-bold text-brand-accent tracking-wide drop-shadow-sm">{client.impact}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Mobile See More Button */}
@@ -190,9 +228,10 @@ export const HomeClientsSection = () => {
             <div className="flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin] [scrollbar-color:#3f3f46_#18181b]">
               <div className="relative w-full h-[48vh] sm:h-[56vh] lg:h-[62vh] bg-black flex items-center justify-center overflow-hidden">
                 <img 
+                  key={currentImageIndex}
                   src={activeClient.screenshots[currentImageIndex]} 
                   alt={`${activeClient.name} preview slide ${currentImageIndex + 1}`}
-                  className="w-full h-full object-contain select-none p-2 sm:p-4"
+                  className="w-full h-full object-contain select-none p-2 sm:p-4 transition-opacity duration-300"
                 />
 
                 <button
