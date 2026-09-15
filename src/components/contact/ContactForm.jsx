@@ -94,7 +94,7 @@ export const ContactForm = () => {
           </label>
           <input 
             type="text"
-            placeholder="John Doe"
+            placeholder=""
             {...register("fullName")}
             disabled={isSubmitting}
             className={`w-full px-4 py-3.5 rounded-xl border bg-white text-sm focus:outline-none focus:ring-2 transition ${
@@ -110,7 +110,7 @@ export const ContactForm = () => {
           </label>
           <input 
             type="email"
-            placeholder="john@enterprise.com"
+            placeholder=""
             {...register("email")}
             disabled={isSubmitting}
             className={`w-full px-4 py-3.5 rounded-xl border bg-white text-sm focus:outline-none focus:ring-2 transition ${
@@ -128,7 +128,7 @@ export const ContactForm = () => {
           </label>
           <input 
             type="tel"
-            placeholder="+91 00000 00000"
+            placeholder=""
             {...register("phone")}
             disabled={isSubmitting}
             className={`w-full px-4 py-3.5 rounded-xl border bg-white text-sm focus:outline-none focus:ring-2 transition ${
@@ -144,7 +144,7 @@ export const ContactForm = () => {
           </label>
           <input 
             type="text"
-            placeholder="Company Ltd."
+            placeholder=""
             {...register("companyName")}
             disabled={isSubmitting}
             className="w-full px-4 py-3.5 rounded-xl border border-zinc-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/20 transition"
@@ -174,7 +174,7 @@ export const ContactForm = () => {
         </label>
         <textarea 
           rows={4}
-          placeholder="Please describe your requirements, key timeline, and business goals..."
+          placeholder=""
           {...register("message")}
           disabled={isSubmitting}
           className={`w-full px-4 py-3.5 rounded-xl border bg-white text-sm focus:outline-none focus:ring-2 transition resize-y ${

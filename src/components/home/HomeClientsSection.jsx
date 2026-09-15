@@ -129,14 +129,7 @@ export const HomeClientsSection = () => {
                 {/* Top Row */}
                 <div className="relative z-10 flex items-start justify-between">
                   <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-md border border-white/40 p-1.5 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src={client.logo} 
-                        alt={`${client.name} logo`} 
-                        className="w-full h-full object-contain rounded-xl"
-                        loading="lazy"
-                      />
-                    </div>
+                    
                     <div>
                       <span className="text-xs font-mono uppercase tracking-widest text-brand-accent font-extrabold block drop-shadow-md">
                         {client.category}

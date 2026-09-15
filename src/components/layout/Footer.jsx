@@ -49,7 +49,7 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-2.5 text-sm text-zinc-400">
               {servicesList.map(s => (
-                <li key={s.id} className="truncate">
+                <li key={s.id} className="">
                   {s.title}
                 </li>
               ))}
@@ -79,7 +79,7 @@ export const Footer = () => {
         </div>
 
         <div className="py-12 border-b border-zinc-800/80 overflow-hidden select-none">
-          <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-zinc-800/40 uppercase whitespace-nowrap">
+          <div className="text-sm sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-zinc-800/40 uppercase whitespace-nowrap">
             Build Something Extraordinary
           </div>
         </div>
