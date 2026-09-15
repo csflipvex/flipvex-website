@@ -1,4 +1,5 @@
 import { HeroSection } from '../components/home/HeroSection';
+import { HomeClientsSection } from '../components/home/HomeClientsSection';
 import { IntroStatsSection } from '../components/home/IntroStatsSection';
 import { PackagesSection } from '../components/home/PackagesSection';
 import { ServicesAccordion } from '../components/home/ServicesAccordion';
@@ -9,6 +10,7 @@ export const Home = () => {
   return (
     <>
       <HeroSection />
+      <HomeClientsSection />
       <IntroStatsSection />
       <PackagesSection />
       <ServicesAccordion />
