@@ -11,7 +11,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-zinc-100">
+      <header className="sticky top-0 z-40 w-full bg-white/70 backdrop-blur-md border-b border-zinc-100">
         <Container>
           <div className="flex items-center justify-between h-20">
             {/* Logo (Left Side) */}
