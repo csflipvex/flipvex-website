@@ -20,34 +20,32 @@ export const PackagesSection = () => {
               key={pkg.id}
               className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
                 pkg.highlight 
-                  ? 'bg-brand-dark text-white shadow-xl ring-2 ring-brand-purple' 
-                  : 'bg-zinc-50 border border-zinc-200 text-brand-dark hover:border-zinc-300 hover:shadow-sm'
+                  ? 'bg-zinc-50 text-zinc-900 shadow-xl ring-2 ring-brand-purple border border-transparent' 
+                  : 'bg-zinc-50 border border-zinc-200 text-zinc-900 hover:border-zinc-300 hover:shadow-sm'
               }`}
             >
               <div>
-                <span className={`inline-block text-[11px] font-mono uppercase tracking-widest font-bold px-3 py-1 rounded-full mb-4 ${
-                  pkg.highlight ? 'bg-brand-accent text-white' : 'bg-zinc-200 text-zinc-700'
-                }`}>
+                <span className="inline-block text-[11px] font-mono uppercase tracking-widest font-bold px-3 py-1 rounded-full mb-4 bg-brand-accent text-white">
                   {pkg.tag}
                 </span>
                 
-                <h3 className="text-2xl font-bold tracking-tight mb-2">
+                <h3 className="text-2xl font-bold tracking-tight mb-2 text-zinc-900">
                   {pkg.title}
                 </h3>
                 
-                <p className={`text-sm mb-6 ${pkg.highlight ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                <p className="text-sm mb-6 text-zinc-600">
                   {pkg.subtitle}
                 </p>
 
-                <div className={`h-px w-full my-6 ${pkg.highlight ? 'bg-zinc-800' : 'bg-zinc-200'}`} />
+                <div className="h-px w-full my-6 bg-zinc-200" />
 
                 <ul className="space-y-3.5 mb-8">
                   {pkg.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm leading-snug">
-                      <span className={`p-0.5 rounded-full mt-0.5 ${pkg.highlight ? 'text-brand-accent' : 'text-brand-purple'}`}>
+                      <span className="p-0.5 rounded-full mt-0.5 text-brand-purple">
                         <Check className="w-4 h-4" />
                       </span>
-                      <span className={pkg.highlight ? 'text-zinc-300' : 'text-zinc-700'}>
+                      <span className="text-zinc-700">
                         {feat}
                       </span>
                     </li>

@@ -70,7 +70,7 @@ export const HomeClientsSection = () => {
   }, [activeClient, handleNextImage, handlePrevImage]);
 
   return (
-    <section className="w-full py-16 md:py-24 bg-zinc-50 border-b border-zinc-200">
+    <section className="w-full py-16 md:py-24 border-b border-zinc-200">
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <SectionHeading 
@@ -83,7 +83,7 @@ export const HomeClientsSection = () => {
           {hasMore && (
             <Link
               to="/our-clients"
-              className="hidden md:inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-bold text-brand-purple hover:text-brand-accent transition py-2 px-4 rounded-full border border-zinc-300 hover:border-brand-accent bg-white shadow-xs"
+              className="hidden md:inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-bold text-brand-purple hover:text-brand-accent transition py-2 px-4 rounded-full border border-zinc-300 hover:border-brand-accent shadow-xs"
             >
               <span>See More ({clientsData.length})</span>
               <ArrowRight className="w-4 h-4" />
@@ -102,7 +102,7 @@ export const HomeClientsSection = () => {
               <div 
                 key={client.id}
                 onClick={() => handleOpenModal(client)}
-                className="group relative p-8 rounded-3xl bg-zinc-900 border border-zinc-300/60 hover:border-brand-purple/70 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between h-80 cursor-pointer overflow-hidden"
+                className="group relative p-6 sm:p-8 rounded-3xl border border-black hover:border-brand-purple/70 transition-all duration-500 flex flex-col justify-between h-80 cursor-pointer overflow-hidden"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -118,38 +118,37 @@ export const HomeClientsSection = () => {
                     <img 
                       src={bgImage} 
                       alt="" 
-                      className="w-full h-full object-cover object-top opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover object-top   group-hover:scale-105 transition-all duration-700 ease-out"
                     />
                   </div>
                 )}
 
-                {/* Soft Smooth Dark Gradient Overlay */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 pointer-events-none" />
+                {/* Color-Synced Smooth Gradient Overlay */}
+                <div className="absolute inset-0 z-0  pointer-events-none" />
 
                 {/* Top Row */}
                 <div className="relative z-10 flex items-start justify-between">
                   <div className="flex items-center gap-3.5">
-                    
                     <div>
                       <span className="text-xs font-mono uppercase tracking-widest text-brand-accent font-extrabold block drop-shadow-md">
                         {client.category}
                       </span>
-                      <span className="text-[11px] font-mono text-zinc-200/90 font-medium drop-shadow-sm">
+                      <span className="text-[11px] font-mono text-zinc-300 font-semibold drop-shadow-sm">
                         View Showcase ({client.screenshots?.length || 0})
                       </span>
                     </div>
                   </div>
-                  <div className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:border-brand-accent transition-all duration-300 shadow-md">
+                  <div className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:border-brand-accent transition-all duration-300 shadow-md">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
 
-                {/* Bottom Row */}
-                <div className="relative z-10">
-                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-white transition-colors drop-shadow-md">
+                {/* Bottom Row with Color-Synced Glassmorphism Box */}
+                <div className="relative z-10 bg-black/50 backdrop-blur-sm p-4 rounded-2xl border border-white/15 shadow-xl">
+                  <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-white transition-colors drop-shadow-md">
                     {client.name}
                   </h3>
-                  <div className="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-mono">
+                  <div className="mt-2.5 pt-2.5 border-t border-white/20 flex items-center justify-between text-xs font-mono">
                     <span className="text-zinc-300 font-medium drop-shadow-sm">Outcome Delivered:</span>
                     <span className="font-bold text-brand-accent tracking-wide drop-shadow-sm">{client.impact}</span>
                   </div>
@@ -164,7 +163,7 @@ export const HomeClientsSection = () => {
           <div className="mt-8 text-center md:hidden">
             <Link
               to="/our-clients"
-              className="inline-flex items-center justify-center gap-2 w-full py-4 px-6 rounded-full bg-brand-dark text-white font-semibold text-xs uppercase tracking-wider hover:bg-zinc-800 transition"
+              className="inline-flex items-center justify-center gap-2 w-full py-4 px-6 rounded-full bg-brand-dark text-white font-semibold text-xs uppercase tracking-wider transition shadow-md"
             >
               <span>See All Clients ({clientsData.length})</span>
               <ArrowRight className="w-4 h-4" />
@@ -173,7 +172,7 @@ export const HomeClientsSection = () => {
         )}
       </Container>
 
-      {/* Modal Viewport */}
+      {/* Modal Viewport (Preserved Unchanged) */}
       {activeClient && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8"
@@ -182,17 +181,17 @@ export const HomeClientsSection = () => {
           aria-label={`${activeClient.name} Showcase`}
         >
           <div 
-            className="fixed inset-0 bg-brand-dark/85 backdrop-blur-md transition-opacity" 
+            className="fixed inset-0" 
             onClick={handleCloseModal} 
           />
 
-          <div className="relative z-10 w-full max-w-5xl max-h-[92vh] bg-brand-dark border border-zinc-800 rounded-3xl shadow-2xl flex flex-col text-white overflow-hidden">
+          <div className="relative z-10 w-full max-w-5xl max-h-[92vh] border border-zinc-800 rounded-3xl shadow-2xl flex flex-col text-white overflow-hidden bg-brand-dark">
             <div className="flex-shrink-0 flex items-center justify-between px-5 sm:px-6 py-4 border-b border-zinc-800 bg-brand-dark">
               <div className="flex items-center gap-3 min-w-0">
                 <img 
                   src={activeClient.logo} 
                   alt="" 
-                  className="w-8 h-8 rounded-lg object-contain bg-white p-1 flex-shrink-0"
+                  className="w-8 h-8 rounded-lg object-contain p-1 flex-shrink-0 bg-white"
                 />
                 <div className="min-w-0">
                   <h4 className="text-base font-bold tracking-tight text-white truncate">
@@ -205,7 +204,7 @@ export const HomeClientsSection = () => {
               </div>
 
               <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-                <span className="text-xs font-mono text-brand-accent font-semibold px-3 py-1 rounded-full bg-white/5 border border-white/10 whitespace-nowrap">
+                <span className="text-xs font-mono text-brand-accent font-semibold px-3 py-1 rounded-full border border-white/10 whitespace-nowrap bg-white/5">
                   {currentImageIndex + 1} / {activeClient.screenshots.length}
                 </span>
                 <button

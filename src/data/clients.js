@@ -3,6 +3,7 @@ import pjk1 from '../../public/images/clients/pjk/pjk1.jpeg';
 import pjk2 from '../../public/images/clients/pjk/pjk2.jpeg';
 import pjk3 from '../../public/images/clients/pjk/pjk3.jpeg';
 import pjk_logo from '../../public/images/clients/pjk/pjk_logo.jpeg';
+import pjkanalytics from '../../public/images/clients/pjk/pjkanalytics.jpeg';
 
 import kap1 from '../../public/images/clients/kap/kap1.jpeg';
 import kap2 from '../../public/images/clients/kap/kap2.jpeg';
@@ -14,6 +15,7 @@ import sense from '../../public/images/clients/sense/sense.jpeg';
 import sense1 from '../../public/images/clients/sense/sense1.jpeg';
 import sense2 from '../../public/images/clients/sense/sense2.jpeg';
 import sense_logo from '../../public/images/clients/sense/sense_logo.png';
+import dashboard from '../../public/images/clients/sense/dashboard.jpeg';
 
 
 
@@ -24,7 +26,7 @@ export const clientsData = [
     category: "E-Commerce",
     impact: "",
     logo: pjk_logo,
-    screenshots: [pjk, pjk1, pjk2, pjk3]
+    screenshots: [pjk, pjk2, pjk3, pjkanalytics]
   },
   {
     id: 2,
@@ -33,7 +35,7 @@ export const clientsData = [
     impact: "",
     logo: sense_logo,
     screenshots: [
-      sense, sense1, sense2
+      dashboard, sense, sense1, sense2
     ]
   },
   {
